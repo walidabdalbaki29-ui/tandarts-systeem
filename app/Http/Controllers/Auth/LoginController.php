@@ -22,7 +22,13 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect('/')->with('success', 'Succesvol ingelogd.');
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin.dashboard')
+                    ->with('success', 'Succesvol ingelogd.');
+            }
+
+            return redirect()->route('home')
+                ->with('success', 'Succesvol ingelogd.');
         }
 
         return back()->withErrors([

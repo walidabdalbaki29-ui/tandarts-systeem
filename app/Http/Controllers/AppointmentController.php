@@ -77,10 +77,10 @@ class AppointmentController extends Controller
 
     public function index()
     {
-$appointments = Appointment::with('service')
-    ->where('user_id', Auth::id())
-    ->get();
-     return view("appointments.index", compact('appointments'));
+        $appointments = Appointment::with('service')
+            ->where('user_id', Auth::id())
+            ->get();
+        return view("appointments.index", compact('appointments'));
     }
 
     public function cancel(Appointment $appointment)

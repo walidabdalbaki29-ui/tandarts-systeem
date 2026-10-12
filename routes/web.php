@@ -6,8 +6,11 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AppointmentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::view('/over-ons', 'over-ons')->name('over-ons');
+Route::view('/contact', 'contact')->name('contact');
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 Route::get('/login', [LoginController::class, 'create'])->name('login');
@@ -23,3 +26,10 @@ Route::get('/mijn-afspraken', [AppointmentController::class, 'index'])->middlewa
 Route::patch('/mijn-afspraken/{appointment}', [AppointmentController::class, 'cancel'])
     ->middleware('auth')
     ->name('appointments.cancel');
+
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+
+});
