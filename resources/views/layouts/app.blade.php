@@ -34,12 +34,12 @@
                         Dashboard
                     </a>
 
-                    <a href="{{ route('admin.dashboard') }}"
+                    <a href="{{ route('admin.appointments.index') }}"
                         class="text-slate-600 hover:text-teal-600 transition">
                         Afspraken beheren
                     </a>
 
-                    <a href="{{ route('admin.dashboard') }}"
+                    <a href="{{ route('admin.services.index') }}"
                         class="text-slate-600 hover:text-teal-600 transition">
                         Diensten beheren
                     </a>
@@ -102,11 +102,12 @@
                     <a href="{{ route('login') }}"
                         class="text-gray-700 hover:text-teal-600">
                         Inloggen
+                        
                     </a>
 
-                    <a href="{{ route('register') }}"
-                        class="bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition">
-                        Account aanmaken
+                    <a href="{{ route('appointments.create') }}"
+                        class="text-slate-600 hover:text-teal-600 transition">
+                        Afspraak maken
                     </a>
                     @endguest
 

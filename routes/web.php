@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AppointmentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminAppointmentController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/over-ons', 'over-ons')->name('over-ons');
@@ -27,9 +28,19 @@ Route::patch('/mijn-afspraken/{appointment}', [AppointmentController::class, 'ca
     ->middleware('auth')
     ->name('appointments.cancel');
 
-
+    //  Admin routes 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/afspraken', [ AdminAppointmentController::class,'index',])->name('appointments.index');
 
+    Route::patch('/afspraken/{appointment}/bevestigen', [ AdminAppointmentController::class,'confirm',])->name('appointments.confirm');
+    Route::patch('/afspraken/{appointment}/annuleren', [ AdminAppointmentController::class,'cancel',])->name('appointments.cancel');
 
+        // Diensten CRUD
+    Route::get('/diensten', [ ServiceController::class,'adminIndex',])->name('services.index');
+    Route::get('/diensten/aanmaken', [ServiceController::class,'create',])->name('services.create');
+    Route::post('/diensten', [ServiceController::class,'store',])->name('services.store');
+    Route::get('/diensten/{service}/bewerken', [ServiceController::class,'edit',])->name('services.edit');
+    Route::put('/diensten/{service}', [ ServiceController::class,'update',])->name('services.update');
+    Route::delete('/diensten/{service}', [ServiceController::class,'destroy',])->name('services.destroy');
 });
