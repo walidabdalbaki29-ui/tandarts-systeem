@@ -105,9 +105,9 @@
                         
                     </a>
 
-                    <a href="{{ route('appointments.create') }}"
-                        class="text-slate-600 hover:text-teal-600 transition">
-                        Afspraak maken
+                    <a href="{{ route('contact') }}"
+                        class="text-white hover:text-white bg-green-700 hover:bg-green-600 px-4 py-2 rounded-lg transition">
+                        Contact opnemen
                     </a>
                     @endguest
 

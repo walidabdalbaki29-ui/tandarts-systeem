@@ -25,9 +25,19 @@ class AppointmentController extends Controller
         ]);
         $service = Service::findOrFail($validated['service_id']);
 
-        $start = Carbon::parse(
-            $validated['appointment_date'] . ' ' . $validated['appointment_time']
+        $start = Carbon::createFromFormat(
+            'Y-m-d H:i',
+            $validated['appointment_date'] . ' ' . $validated['appointment_time'],
+            config('app.timezone')
         );
+
+        if ($start->lessThanOrEqualTo(now())) {
+            return back()
+                ->withErrors([
+                    'appointment_time' => 'Je kunt geen afspraak in het verleden boeken.',
+                ])
+                ->withInput();
+        }
 
         $end = $start->copy()->addMinutes($service->duration);
 
@@ -52,7 +62,7 @@ class AppointmentController extends Controller
             if ($start < $existingEnd && $end > $existingStart) {
                 return back()
                     ->withErrors([
-                      'appointment_time' => 'Dit tijdstip is niet meer beschikbaar.',
+                        'appointment_time' => 'Dit tijdstip is niet meer beschikbaar.',
                     ])
                     ->withInput();
             }

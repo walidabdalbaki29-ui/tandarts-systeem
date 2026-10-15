@@ -89,7 +89,7 @@
                                     <p class="text-sm text-slate-500 mb-4">Selecteer een beschikbare tijd.</p>
 
                                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                                        @foreach (['09:00', '10:00', '11:00', '13:00'] as $time)
+                                        @foreach (['07:00', '08:00', '09:00', '10:00', '11:00', '13:00'] as $time)
                                         <label class="cursor-pointer">
                                             <input type="radio" name="appointment_time" value="{{ $time }}" class="peer sr-only">
                                             <span class="block text-center border border-slate-300 rounded-lg px-4 py-2 text-sm
@@ -177,7 +177,6 @@
                 </div>
 
             </div>
-            <!-- Einde rechterkolom -->
 
         </div>
 

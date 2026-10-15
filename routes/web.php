@@ -28,7 +28,7 @@ Route::patch('/mijn-afspraken/{appointment}', [AppointmentController::class, 'ca
     ->middleware('auth')
     ->name('appointments.cancel');
 
-    //  Admin routes 
+//  Admin routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/afspraken', [ AdminAppointmentController::class,'index',])->name('appointments.index');
@@ -36,7 +36,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::patch('/afspraken/{appointment}/bevestigen', [ AdminAppointmentController::class,'confirm',])->name('appointments.confirm');
     Route::patch('/afspraken/{appointment}/annuleren', [ AdminAppointmentController::class,'cancel',])->name('appointments.cancel');
 
-        // Diensten CRUD
+    // Diensten CRUD
     Route::get('/diensten', [ ServiceController::class,'adminIndex',])->name('services.index');
     Route::get('/diensten/aanmaken', [ServiceController::class,'create',])->name('services.create');
     Route::post('/diensten', [ServiceController::class,'store',])->name('services.store');
