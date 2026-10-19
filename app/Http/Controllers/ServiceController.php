@@ -82,4 +82,6 @@ class ServiceController extends Controller
             ->route('admin.services.index')
             ->with('success', 'De dienst is succesvol verwijderd.');
     }
+
+
 }

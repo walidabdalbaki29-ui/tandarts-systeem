@@ -14,7 +14,49 @@ class AppointmentController extends Controller
     {
         $service = Service::findOrFail($request->service);
 
-        return view('appointments.create', compact('service'));
+        $availableTimes = [
+            '07:00','08:00','09:00','10:00','11:00','13:00','14:00','15:00','16:00','17:00'
+        ];
+
+        if ($request->filled('appointment_date')) {
+            $date = $request->input('appointment_date');
+
+            $appointments = Appointment::with('service')
+                ->whereDate('appointment_date', $date)
+                ->whereIn('status', ['pending', 'confirmed'])
+                ->get();
+
+            $availableTimes = collect($availableTimes)->filter(
+                function ($time) use ($date, $appointments, $service) {
+                    $start = Carbon::parse("$date $time");
+
+                    if ($start->lessThanOrEqualTo(now())) {
+                        return false;
+                    }
+
+                    $end = $start->copy()->addMinutes($service->duration);
+
+                    foreach ($appointments as $appointment) {
+                        $existingStart = Carbon::parse(
+                            $appointment->appointment_date . ' ' .
+                                $appointment->appointment_time
+                        );
+
+                        $existingEnd = $existingStart->copy()->addMinutes(
+                            $appointment->service->duration
+                        );
+
+                        if ($start < $existingEnd && $end > $existingStart) {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+            )->values()->all();
+        }
+
+        return view('appointments.create', compact('service', 'availableTimes'));
     }
     public function store(Request $request)
     {

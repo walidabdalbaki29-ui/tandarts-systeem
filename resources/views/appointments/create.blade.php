@@ -32,8 +32,8 @@
 
                 <div class="h-64 lg:h-auto bg-slate-200">
                     <img
-                        src="/images/Home-page.jpeg"
-                        alt="Tandartspraktijk"
+                        src="/images/Afspraak-maken.png"
+                        alt="Tandartspraktijk Nova Tandzorg"
                         class="w-full h-full object-cover">
                 </div>
 
@@ -53,7 +53,7 @@
                     @foreach ($errors->all() as $error)
                     <p class="text-sm text-red-600">{{ $error }}</p>
                     @endforeach
-                </div>
+                </div> 
                 @endif
 
                 <form method="POST" action="{{ route('appointments.store') }}">
@@ -75,6 +75,7 @@
                                         id="appointment_date"
                                         name="appointment_date"
                                         min="{{ date('Y-m-d') }}"
+                                        value="{{ old('appointment_date', request('appointment_date')) }}"
                                         class="w-full border border-slate-300 rounded-lg px-4 py-3">
                                 </div>
                             </div>
@@ -89,16 +90,20 @@
                                     <p class="text-sm text-slate-500 mb-4">Selecteer een beschikbare tijd.</p>
 
                                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                                        @foreach (['07:00', '08:00', '09:00', '10:00', '11:00', '13:00'] as $time)
-                                        <label class="cursor-pointer">
-                                            <input type="radio" name="appointment_time" value="{{ $time }}" class="peer sr-only">
-                                            <span class="block text-center border border-slate-300 rounded-lg px-4 py-2 text-sm
-                                                     peer-checked:bg-teal-600 peer-checked:text-white peer-checked:border-teal-600
-                                                     hover:border-teal-600">
-                                                {{ $time }}
-                                            </span>
+                                        @forelse ($availableTimes as $time)
+                                        <label>
+                                            <input
+                                                type="radio"
+                                                name="appointment_time"
+                                                value="{{ $time }}"
+                                                required
+                                                @checked(old('appointment_time')===$time)>
+
+                                            {{ $time }}
                                         </label>
-                                        @endforeach
+                                        @empty
+                                        <p>Geen beschikbare tijdstippen voor deze datum.</p>
+                                        @endforelse
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +125,6 @@
                             </div>
                         </div>
 
-                        <!-- Buttons -->
                         <div class="flex justify-between border-t border-slate-200 pt-6">
                             <a href="/diensten" class="border border-slate-300 text-slate-700 px-5 py-2 rounded-lg">
                                 Vorige
@@ -188,7 +192,16 @@
     const summaryDate = document.getElementById('summary_date');
 
     appointmentDate.addEventListener('change', function() {
-        summaryDate.textContent = this.value;
+        summaryDate.textContent = this.value || 'Nog niet gekozen';
+
+        if (this.value) {
+            const url = new URL(window.location.href);
+
+            url.searchParams.set('service', '{{ $service->id }}');
+            url.searchParams.set('appointment_date', this.value);
+
+            window.location.href = url.toString();
+        }
     });
 
     const appointmentTimes = document.querySelectorAll(
