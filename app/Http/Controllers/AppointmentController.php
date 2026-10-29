@@ -121,7 +121,7 @@ class AppointmentController extends Controller
             'status' => 'pending',
         ]);
 
-        return redirect('/')->with(
+        return redirect('diensten')->with(
             'success',
             'Je afspraak is succesvol aangevraagd.'
         );
