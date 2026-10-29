@@ -4,6 +4,11 @@
 
 @section('content')
 
+@if (session('success')) <div class="max-w-7xl mx-auto px-6 mt-6"> <div class="rounded-lg border border-green-200 bg-green-50 p-4"> <p class="font-semibold text-green-700">
+{{ session('success') }} </p> </div> </div>
+@endif
+
+
 <section class="bg-slate-50 py-16 md:py-20">
     <div class="max-w-7xl mx-auto px-6">
 

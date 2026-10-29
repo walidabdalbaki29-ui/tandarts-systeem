@@ -23,7 +23,7 @@ class AdminServiceTest extends TestCase
                 'name' => 'Tandartscontrole',
                 'description' => 'Periodieke controle van het gebit',
                 'duration' => 30,
-                'price' => 25.00,
+                'price' => 50.00,
             ]
         );
 
@@ -33,7 +33,7 @@ class AdminServiceTest extends TestCase
             'name' => 'Tandartscontrole',
             'description' => 'Periodieke controle van het gebit',
             'duration' => 30,
-            'price' => 25.00,
+            'price' => 50.00,
         ]);
     }
 
@@ -47,7 +47,7 @@ class AdminServiceTest extends TestCase
             'name' => 'Tandartscontrole',
             'description' => 'Oude beschrijving',
             'duration' => 30,
-            'price' => 25.00,
+            'price' => 50.00,
         ]);
 
         $response = $this->actingAs($admin)->put(
@@ -80,7 +80,7 @@ class AdminServiceTest extends TestCase
             'name' => 'Tandartscontrole',
             'description' => 'Periodieke controle',
             'duration' => 30,
-            'price' => 25.00,
+            'price' => 50.00,
         ]);
 
         $response = $this->actingAs($admin)->delete(

@@ -32,16 +32,14 @@
                     <a
                         href="{{ route('login') }}"
                         class="text-center bg-teal-600 text-white px-6 py-3 rounded-lg
-                               font-semibold hover:bg-teal-700 transition"
-                    >
+                               font-semibold hover:bg-teal-700 transition">
                         Afspraak maken
                     </a>
 
                     <a
                         href="/diensten"
                         class="text-center border border-teal-600 text-teal-700 px-6 py-3
-                               rounded-lg font-semibold hover:bg-teal-50 transition"
-                    >
+                               rounded-lg font-semibold hover:bg-teal-50 transition">
                         Onze diensten
                     </a>
 
@@ -55,8 +53,7 @@
                 <img
                     src="{{ asset('images/tandartspraktijk.jpeg') }}"
                     alt="Hero afbeelding"
-                    class="w-full h-full object-cover"
-                >
+                    class="w-full h-full object-cover">
 
             </div>
 
@@ -153,53 +150,50 @@
                 <a
                     href="/diensten"
                     class="inline-block bg-teal-600 text-white px-5 py-3 rounded-lg
-                           font-semibold hover:bg-teal-700 transition"
-                >
+                           font-semibold hover:bg-teal-700 transition">
                     Alle diensten bekijken
                 </a>
 
             </div>
 
 
-            <!-- Diensten rechts -->
+            <!-- Diensten-->
             <div class="lg:col-span-3">
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
                     @foreach ($services as $service)
 
-    <div class="bg-white border border-slate-200 rounded-xl p-3
-                shadow-sm hover:shadow-md transition overflow-x-hidden width-full" >
+                    <div class="bg-white border border-slate-200 rounded-xl p-3
+                shadow-sm hover:shadow-md transition overflow-x-hidden width-full">
 
-        <div class="h-24 rounded-lg mb-3 overflow-hidden">
-            <img
-                src="{{ asset('images/' . $service->image) }}"
-                alt="{{ $service->name }}"
-                class="w-full h-full object-cover"
-            >
-        </div>
+                        <div class="h-24 rounded-lg mb-3 overflow-hidden">
+                            <img
+                                src="{{ asset('images/' . $service->image) }}"
+                                alt="{{ $service->name }}"
+                                class="w-full h-full object-cover">
+                        </div>
 
-        <h3 class="font-bold text-slate-900 text-sm mb-2">
-            {{ $service->name }}
-        </h3>
+                        <h3 class="font-bold text-slate-900 text-sm mb-2">
+                            {{ $service->name }}
+                        </h3>
 
-        <p class="text-xs text-slate-500 mb-3">
-            {{ $service->description }}
-        </p>
+                        <p class="text-xs text-slate-500 mb-3">
+                            {{ $service->description }}
+                        </p>
 
-        <p class="text-sm font-semibold text-slate-900 mb-2">
-            Vanaf € {{ number_format($service->price, 2, ',', '.') }}
-        </p>
+                        <p class="text-sm font-semibold text-slate-900 mb-2">
+                            Vanaf € {{ number_format($service->price, 2, ',', '.') }}
+                        </p>
 
-        <a
-            href="/diensten"
-            class="text-teal-600 text-xs font-semibold hover:text-teal-700"
-        >
-            Alle diensten →
-        </a>
+                        <a
+                            href="/diensten"
+                            class="text-teal-600 text-xs font-semibold hover:text-teal-700">
+                            Alle diensten →
+                        </a>
 
-    </div>
+                    </div>
 
-@endforeach
+                    @endforeach
                 </div>
 
             </div>
@@ -219,8 +213,7 @@
                     <img
                         src="{{ asset('images/HOME-2.png') }}"
                         alt="Over ons afbeelding"
-                        class="w-full h-full object-cover rounded-2xl"
-                    >
+                        class="w-full h-full object-cover rounded-2xl">
                 </span>
             </div>
 
@@ -249,8 +242,7 @@
                 <a
                     href="/over-ons"
                     class="inline-block bg-teal-600 text-white px-5 py-3 rounded-lg
-                           font-semibold hover:bg-teal-700 transition"
-                >
+                           font-semibold hover:bg-teal-700 transition">
                     Meer over ons
                 </a>
 
@@ -287,13 +279,11 @@
 
             </div>
 
-            <!-- Button -->
             <a
                 href="{{ route('services.index') }}"
                 class="bg-blue-600 text-white px-6 py-3 rounded-lg
                        font-semibold text-sm hover:bg-blue-700 transition
-                       whitespace-nowrap"
-            >
+                       whitespace-nowrap">
                 Afspraak maken
             </a>
 
